@@ -1,5 +1,6 @@
 <?php
 include('./admin/inc/config.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +10,10 @@ include('./admin/inc/config.php');
     <title>CtrlClick - Smart Web Development Agency | Australia </title>
     <meta name="description" content="Terms & Condition | Smart Web Design Agency| Australia">
     <meta name="keywords" content="Terms & Condition | Smart Web Design Agency| Australia">
+
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://ctrlclick.com.au/area.php" />
+
     <!-- Stylesheets -->
     <link rel="preconnect" href="https://fonts.gstatic.com/">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;family=Teko:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -57,6 +62,17 @@ include('./admin/inc/config.php');
             height: 70px;
             object-fit: cover;
         }
+
+        #find_list {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            gap: 0 20px;
+        }
+
+        #find_list .border-line {
+            padding-left: 15px;
+        }
     </style>
 
 </head>
@@ -76,11 +92,11 @@ include('./admin/inc/config.php');
             <div class="banner-inner">
                 <div class="auto-container">
                     <div class="inner-container clearfix">
-                        <h1 id="yellow-color">Disclaimer</h1>
+                        <h1 id="yellow-color">Website Designing Services By Area – Complete Sitemap</h1>
                         <div class="page-nav">
                             <ul class="bread-crumb clearfix">
                                 <li><a href="index.php">Home</a></li>
-                                <li class="active">Disclaimer</li>
+                                <li class="active">Website Designing Services By Area – Complete Sitemap</li>
                             </ul>
                         </div>
                     </div>
@@ -89,59 +105,68 @@ include('./admin/inc/config.php');
         </section>
         <!--End Banner Section -->
 
+
+        <!-- Area Search Start -->
         <div class="sidebar-page-container">
             <div class="auto-container">
                 <div class="row clearfix">
 
-                    <!--Content Side-->
-                    <div class="content-side col-lg-8 col-md-12 col-sm-12">
+                    <!-- State Area Name -->
+                    <div class="tf-sp-2 flat-animate-tab" style="margin-bottom: 80px;">
+                        <div class="container">
+                            <h3 class="mb-5" style=" border-bottom:1px solid #e4e4e4; padding-bottom: 30px;">Website Designing Services By Area – Complete Sitemap</h3>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <?php
+                                    // Fetch area_name and url from database and group by first letter of area_name
+                                    $statement = $pdo->prepare("SELECT area_name, url FROM tbl_area ORDER BY area_name ASC");
+                                    $statement->execute();
+                                    $areas = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                        <?php
-                        $statement = $pdo->prepare("SELECT * FROM   tbl_disclaimer WHERE id=1");
-                        $statement->execute();
-                        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-                        foreach ($result as $row) {
-                            $heading = $row['heading'];
-                            $content = $row['content'];
-                        } ?>
-                        <div class="blog-details">
-                            <!--News Block-->
-                            <div class="post-details">
-                                <div class="inner-box">
-                                    <div class="lower-box">
-                                        <h4><?= $heading; ?></h4>
-                                        <div class="text">
-                                            <p><?= $content; ?></p>
-                                        </div>
+                                    // Group areas alphabetically
+                                    $groupedAreas = [];
+                                    foreach ($areas as $area) {
+                                        $firstChar = strtoupper(substr($area['area_name'], 0, 1));
+                                        if (!isset($groupedAreas[$firstChar])) {
+                                            $groupedAreas[$firstChar] = [];
+                                        }
+                                        $groupedAreas[$firstChar][] = $area; // Store full array
+                                    }
+                                    ?>
+
+                                    <div class="row">
+                                        <?php foreach ($groupedAreas as $letter => $areaList) { ?>
+                                            <div class="col-lg-12 pb-5">
+                                                <h6 class="pb-3 redColor" style="<?= ($letter !== array_key_first($groupedAreas)) ? 'border-top:1px solid #e4e4e4; padding-top: 30px;' : '' ?>">
+                                                    <strong><?= $letter; ?></strong>
+                                                </h6>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <ul id="find_list">
+                                                            <?php foreach ($areaList as $areaData) { ?>
+                                                                <li>
+                                                                    <a href="area-details.php?url=<?= urlencode($areaData['url']); ?>" class="border-right">
+                                                                        <?= $areaData['area_name']; ?>
+                                                                    </a>
+                                                                    <span class="border-line">|</span>
+                                                                </li>
+                                                            <?php } ?>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- end Area Name -->
 
-                    <!--Sidebar Side-->
-                    <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
-                        <aside class="sidebar blog-sidebar">
-                            <div class="sidebar-widget archives">
-                                <div class="widget-inner" style="background-color: #01395c !important;">
-                                    <div class="sidebar-title">
-                                        <h4 style="color: white;">Quick Links</h4>
-                                    </div>
-                                    <ul>
-                                        <li><a href="about.php" style="color: #ffffff;">About Us</a></li>
-                                        <li><a href="service.php" style="color: #ffffff;">Services </a></li>
-                                        <li><a href="terms_condition.php" style="color: #ffffff;">Terms & condition</a></li>
-                                        <li><a href="privacy_ploicy.php" style="color: #ffffff;">Privacy & Ploicy </a></li>
-                                        <li><a href="refund_ploicy.php" style="color: #ffffff;">Refund & Ploicy</a></li>
-                                        <li><a href="disclaimer.php" style="color: #ffffff;">Disclaimer</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </aside>
-                    </div>
                 </div>
             </div>
         </div>
+        <!-- Area Search End -->
 
         <!-- Main Footer Start -->
         <?php include('include/footer.php'); ?>

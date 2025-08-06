@@ -289,7 +289,7 @@ foreach ($result as $row) {
 									$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 									foreach ($result as $row) {
 									?>
-										<option value="<?php echo $row['ind_id']; ?>" <?php if ($row['ind_id'] == $type_id) {
+										<option value="<?php echo $row['ind_id']; ?>" <?php if ($row['ind_id'] == $ind_id) {
 																							echo 'selected';
 																						} ?>><?php echo $row['ind_name']; ?></option>
 									<?php

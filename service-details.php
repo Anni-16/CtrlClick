@@ -164,7 +164,7 @@ if (isset($_GET['url'])) {
                                         $i++;
                                     ?>
                                         <div class="phone">
-                                            <a href="portfolio-single.php?url=<?= ($row['p_name']); ?>"> <img src="./admin/uploads/portfolio/<?= $row['p_image']; ?>" alt="" style="width: 100px; height: 80px;">&nbsp;&nbsp;
+                                            <a href="portfolio.php"> <img src="./admin/uploads/portfolio/<?= $row['p_image']; ?>" alt="" style="width: 100px; height: 80px;">&nbsp;&nbsp;
                                                 <span style="font-size:25px;"><?= $row['p_name']; ?></span></a>
                                         </div>
                                     <?php } ?>
