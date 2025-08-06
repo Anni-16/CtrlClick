@@ -54,7 +54,7 @@ if (isset($_GET['url'])) {
     <meta name="title" content="<?= $b_meta_title; ?>">
     <meta name="keywords" content="<?= $b_meta_keyword; ?>">
     <meta name="description" content="<?= $b_meta_desc; ?>">
-    
+
     <!-- Canonical Tag -->
     <link rel="canonical" href="<?= $canonicalUrl; ?>" />
 
@@ -173,17 +173,6 @@ if (isset($_GET['url'])) {
                     <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
                         <aside class="sidebar blog-sidebar">
                             <!--Sidebar Widget-->
-                            <div class="sidebar-widget search-box">
-                                <div class="widget-inner">
-                                    <form method="post" action="http://layerdrops.com/linoorhtml/blog.html">
-                                        <div class="form-group">
-                                            <input type="search" name="search-field" value="" placeholder="Search" required="" style="color: white;">
-                                            <button type="submit"><span class="icon flaticon-magnifying-glass-1" style="color: white;"></span></button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
                             <div class="sidebar-widget recent-posts">
                                 <div class="widget-inner" style="background-color: #01395c;">
                                     <div class="sidebar-title">
@@ -206,7 +195,7 @@ if (isset($_GET['url'])) {
                                                 </figure>
                                             </a>
                                             <h5 class="text">
-                                                <a href="blog-details.php?url=<?= $row['url'] ; ?>" style="color: white !important;"><?= $b_name; ?>
+                                                <a href="blog-details.php?url=<?= $row['url']; ?>" style="color: white !important;"><?= $b_name; ?>
                                                     <br><span><?= $formattedDate; ?></span></a>
                                             </h5>
                                         </div>
@@ -229,7 +218,7 @@ if (isset($_GET['url'])) {
                                             $i++;
                                             $b_name = $row['b_name'];
                                         ?>
-                                            <li><a href="blog-details.php?url=<?= $row['url'] ; ?>" style="color: #ffffff;"><?= $b_name; ?></a></li>
+                                            <li><a href="blog-details.php?url=<?= $row['url']; ?>" style="color: #ffffff;"><?= $b_name; ?></a></li>
                                         <?php } ?>
                                         <li><a href="blog.php" style="color: #ffffff;">View All </a></li>
                                     </ul>
