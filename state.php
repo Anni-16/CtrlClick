@@ -161,7 +161,7 @@ if (isset($_GET['url'])) {
                                     </div>
                                     <ul>
                                         <?php
-                                        $city_stmt = $pdo->prepare("SELECT * FROM tbl_city WHERE state_id = ? ORDER BY city_name ASC LIMIT 4");
+                                        $city_stmt = $pdo->prepare("SELECT * FROM tbl_city WHERE state_id = ? ORDER BY city_name ASC");
                                         $city_stmt->execute([$state_id]);
                                         $cities = $city_stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -169,7 +169,8 @@ if (isset($_GET['url'])) {
                                         ?>
 
                                             <li><a href="city-details.php?url=<?= $city['url']; ?>" style="color: #ffffff;"><?= $city['city_name']; ?></a></li>
-                                        <?php } ?>
+                                            <?php } ?>
+                                            <li><a href="city.php" style="color: #ffffff;">View All</a></li>
                                     </ul>
                                 </div>
                             </div>

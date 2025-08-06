@@ -160,7 +160,7 @@ if (isset($_GET['url'])) {
                                     </div>
                                     <ul>
                                         <?php
-                                        $area_stmt = $pdo->prepare("SELECT * FROM tbl_area WHERE city_id = ? ORDER BY area_name ASC LIMIT 4");
+                                        $area_stmt = $pdo->prepare("SELECT * FROM tbl_area WHERE city_id = ? ORDER BY area_name ASC");
                                         $area_stmt->execute([$city_id]);
                                         $areas = $area_stmt->fetchAll(PDO::FETCH_ASSOC);
 

@@ -6,8 +6,6 @@ include('admin/inc/config.php');
 <!DOCTYPE html>
 <html lang="en">
 
-
-
 <head>
     <meta charset="utf-8">
     <title>CtrlClick - Smart Web Development Agency | Australia </title>
@@ -88,7 +86,7 @@ include('admin/inc/config.php');
                                 <div class="row">
                                     <?php
                                     // Use correct table: tbl_plan_category
-                                    $statement = $pdo->prepare("SELECT * FROM tbl_plan_category WHERE   status = 1 ORDER BY plan_cat_id ASC");
+                                    $statement = $pdo->prepare("SELECT * FROM tbl_plan_category WHERE   status = 1 ORDER BY plan_cat_name ASC");
                                     $statement->execute();
                                     $plan_cat_list = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -106,12 +104,12 @@ include('admin/inc/config.php');
                                                     </h3>
                                                     <div class="pricing-card__bottom">
                                                         <ul>
-                                                            <li><a href="mailto:business@firstpointcreations.com">business@firstpointcreations.com</a></li>
-                                                            <li><a href="tel:+91-9871688800">+91-9871688800</a></li>
+                                                            <li><a href="mailto:sales@ctrlclick.com.au">sales@ctrlclick.com.au</a></li>
+                                                            <li><a href="tel:+61423964899">+61 423964899</a></li>
                                                         </ul>
                                                         <div class="theme-btn btn-style-one" style="margin-top: 30px; cursor: pointer;">
                                                             <i class="btn-curve"></i>
-                                                            <a href="package-sub-cat.php?id=<?= $cat_id ?>"><span class="btn-title">View All Package</span></a>
+                                                            <a href="package-sub-cat.php?url=<?= $plan_cat['url']; ?>"><span class="btn-title">View All Package</span></a>
                                                         </div>
                                                     </div>
                                                 </div>

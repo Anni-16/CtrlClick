@@ -27,7 +27,7 @@
                        <div class="footer-widget logo-widget">
                            <div class="widget-content">
                                <div class="logo">
-                                   <a href="index.php"><img id="fLogo" src="images/logo.png" alt="" style="width: 160px; height:auto;"/></a>
+                                   <a href="index.php"><img id="fLogo" src="images/logo.png" alt="" style="width: 160px; height:auto;" /></a>
                                </div>
                                <div class="text" style="color: #ffffff;">Ctrl Click Welcomes You Because Your Website Deserves More Than Just Pretty Pixels</div>
                                <ul class="social-links clearfix">
@@ -41,7 +41,7 @@
                                         $social_url = $row['social_url'];
                                         $social_icon = $row['social_icon'];
                                     ?>
-                                       <?php if ($social_url != ''): ?>
+                                       <?php if ($social_url != '') : ?>
                                            <li>
                                                <a href="<?= $social_url; ?>" target="_blank" rel="noopener noreferrer">
                                                    <span class="<?= $social_icon; ?>" style="color: #01395c;"></span>
@@ -85,19 +85,19 @@
                                <div class="row clearfix">
                                    <div class="col-md-12 col-sm-12">
                                        <ul>
-                                    <?php
-                                    $statement = $pdo->prepare("SELECT * FROM tbl_service ORDER BY ser_id ASC");
-                                    $statement->execute();
-                                    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                                           <?php
+                                            $statement = $pdo->prepare("SELECT * FROM tbl_service ORDER BY ser_id ASC");
+                                            $statement->execute();
+                                            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                                    foreach ($result as $row) {
-                                        $ser_heading = $row['ser_heading'];
-                                    ?>
-                                        <li><a href="service-details.php?url=<?= $row['url']; ?>"><?= ($ser_heading); ?></a></li>
-                                    <?php } ?>
-                                    <li><a href="service.php">View All</a></li>
-                                </ul>
-                                    </div>
+                                            foreach ($result as $row) {
+                                                $ser_heading = $row['ser_heading'];
+                                            ?>
+                                               <li><a href="service-details.php?url=<?= $row['url']; ?>"><?= ($ser_heading); ?></a></li>
+                                           <?php } ?>
+                                           <li><a href="service.php">View All</a></li>
+                                       </ul>
+                                   </div>
                                </div>
                            </div>
                        </div>
@@ -112,16 +112,16 @@
                                    <div class="col-md-12 col-sm-12">
                                        <ul>
                                            <?php
-                                            $i = 0;
-                                            $statement = $pdo->prepare("SELECT * FROM tbl_portfolio ORDER BY p_id DESC LIMIT 6");
+                                            $statement = $pdo->prepare("SELECT * FROM tbl_state WHERE state_font_display = 1 ORDER BY state_name ASC LIMIT 7");
                                             $statement->execute();
-                                            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-                                            foreach ($result as $row) {
-                                                $i++;
+                                            $states = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                                            foreach ($states as $state) {
                                             ?>
-                                               <li><a href="portfolio-details.php?url=<?= ($row['p_name']); ?>"><?= $row['p_name']; ?></a></li>
+
+                                               <li><a href="state.php?url=<?= $state['state_cap_url']; ?>"><?= $state['state_capital']; ?></a></li>
                                            <?php } ?>
-                                           <li><a href="portfolio.php">View All</a></li>
+                                           <!-- <li><a href="portfolio.php">View All</a></li> -->
                                        </ul>
                                    </div>
                                </div>
@@ -145,12 +145,9 @@
                            <div class="widget-content">
                                <h6>Contact</h6>
                                <ul class="contact-info">
-                                   <li class="address" style="color: #ffffff;"><span class="icon flaticon-pin-1"
-                                           style="color: #ffffff;"></span><?= $address; ?></li>
-                                   <li><span class="icon flaticon-call" style="color: #ffffff;"></span><a
-                                           href="tel:<?= $phone_1; ?>"><?= $phone_1; ?></a></li>
-                                   <li><span class="icon flaticon-email-2" style="color: #ffffff;"></span><a
-                                           href="mailto:<?= $email_id_1; ?>"><?= $email_id_1; ?></a></li>
+                                   <li class="address" style="color: #ffffff;"><span class="icon flaticon-pin-1" style="color: #ffffff;"></span><?= $address; ?></li>
+                                   <li><span class="icon flaticon-call" style="color: #ffffff;"></span><a href="tel:<?= $phone_1; ?>"><?= $phone_1; ?></a></li>
+                                   <li><span class="icon flaticon-email-2" style="color: #ffffff;"></span><a href="mailto:<?= $email_id_1; ?>"><?= $email_id_1; ?></a></li>
                                </ul>
                            </div>
                        </div>
@@ -167,8 +164,7 @@
                    <span style="font-size:18px;">CtrlClick ©
                        <script>
                            document.write(new Date().getFullYear());
-                       </script> All Rights Reserved | <a href="https://firstpointwebdesign.com" target="_blank"><span style="color:#999B9F;"> Website Design</span></a> - By - <a
-                           href="https://firstpointwebdesign.com" target="_blank" style="color:#999B9F;">First Point Web Design</a>
+                       </script> All Rights Reserved | <a href="https://firstpointwebdesign.com" target="_blank"><span style="color:#999B9F;"> Website Design</span></a> - By - <a href="https://firstpointwebdesign.com" target="_blank" style="color:#999B9F;">First Point Web Design</a>
                    </span>
                </div>
            </div>
@@ -177,5 +173,4 @@
    </footer>
 
 
-   <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"
-           style="color: #ffffff;"></i></a>
+   <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up" style="color: #ffffff;"></i></a>

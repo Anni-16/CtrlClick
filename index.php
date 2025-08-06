@@ -635,7 +635,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2 style="font-weight: 400; text-transform: uppercase; text-align: center; color: #ffffff; margin: 0;">
-                        Company Partners<span class="dot">.</span></h2>
+                        Our Clients<span class="dot">.</span></h2>
                     <div class="text" style="text-align: center; color: #ffffff; ">Ctrl Click is acknowledged by clients and partners as one of the best web design companies in Australia.</div>
                 </div>
             </div>
@@ -663,11 +663,65 @@
             </div>
         </section>
 
+        <!-- Area We Are Serve Section  -->
+        <section class="map-australia" style="background-color: #01395c;">
+            <div class="auto-container">
+                <div class="row" style="padding-bottom:50px;">
+                    <div class="col-lg-12">
+                        <h2 style="font-weight: 400; text-transform: uppercase; text-align: center; color: #ffffff; margin: 0;">
+                            AERA WE ARE SERVE<span class="dot">.</span></h2>
+                        <div class="text" style="text-align: center; color: #ffffff; ">Ctrl Click is acknowledged by clients and partners as one of the best web design companies in Australia.</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <?php
+                    $statement = $pdo->prepare("SELECT * FROM tbl_state WHERE state_font_display = 1 ORDER BY state_name ASC");
+                    $statement->execute();
+                    $states = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                    foreach ($states as $state) {
+                    ?>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <a href="state.php?url=<?= $state['state_cap_url']; ?>">
+                                <div class="funfact-six__item">
+                                    <i class="funfact-six__icon flaticon-architect"></i>
+                                    <h5 style="color: #ffffff;"><a href="state.php?url=<?= $state['state_cap_url']; ?>" style="color: #ffffff;"><?= $state['state_capital']; ?></a></h5>
+                                    <?php
+                                    // $city_stmt = $pdo->prepare("SELECT * FROM tbl_city WHERE state_id = ? ORDER BY city_id DESC LIMIT 4");
+                                    // $city_stmt->execute([$state['state_id']]);
+                                    // $cities = $city_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                    // foreach ($cities as $city) {
+                                    ?>
+                                    <!-- <a href="city-details.php?url=<?= $city['url']; ?>">
+                                        <p class="funfact-six__text" style="padding-bottom: 10px;"><?= $city['city_name']; ?></p>
+                                    </a> -->
+                                    <?php
+                                    // } 
+                                    ?>
+                                    <!-- <div style="padding-top: 10px;">
+                                    <a href="city.php">
+                                        <p class="funfact-six__text">Veiw All</p>
+                                    </a>
+                                </div> -->
+                                </div>
+                            </a>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </section>
+        <br>
+        <br>
+        <!-- Area We Serve Section End -->
+
+
         <!-- news section -->
-        <section class="news-two">
+        <section class="news-two" style="padding-top: 0px;">
             <div class="auto-container">
                 <div class="sec-title-two text-center">
-                    <h2 style="font-weight: 400;">Our Blog</h2>
+                    <h2 style="font-weight: 400;">OUR BLOG</h2>
                     <div class="text">Control Click’s guide to building better websites and stronger online presence.</div>
                 </div>
                 <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "spaceBetween": 0, "loop": true, "slidesPerGroup": 2,
@@ -747,48 +801,6 @@
             </div>
         </section>
 
-        <!-- Area We Are Serve Section  -->
-        <section class="map-australia" style="background-color: #01395c;">
-            <div class="auto-container">
-                <div class="row">
-                    <h2 style="text-align: center; padding-bottom:30px; text-transform: uppercase; color:#ffffff;">AERA WE ARE SERVE</h2>
-                </div>
-
-                <div class="row">
-                    <?php
-                    $statement = $pdo->prepare("SELECT * FROM tbl_state WHERE state_font_display = 1 ORDER BY state_name ASC");
-                    $statement->execute();
-                    $states = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                    foreach ($states as $state) {
-                    ?>
-                        <div class="col-sm-12 col-md-6 col-lg-3">
-                            <div class="funfact-six__item">
-                                <i class="funfact-six__icon flaticon-architect"></i>
-                                <h5 style="color: #ffffff;"><a href="state.php?url=<?= $state['state_cap_url']; ?>" style="color: #ffffff;"><?= $state['state_capital']; ?></a></h5>
-                                <?php
-                                $city_stmt = $pdo->prepare("SELECT * FROM tbl_city WHERE state_id = ? ORDER BY city_id DESC LIMIT 4");
-                                $city_stmt->execute([$state['state_id']]);
-                                $cities = $city_stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                                foreach ($cities as $city) {
-                                ?>
-                                   <a href="city-details.php?url=<?= $city['url']; ?>"> <p class="funfact-six__text" ><?= $city['city_name']; ?></p></a>
-                                   <div style="padding-top: 10px;">
-                                   <a href="city.php" >
-                                        <p class="funfact-six__text">Veiw All</p>
-                                    </a>
-                                   </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </section>
-        <br>
-        <br>
-        <!-- Area We Serve Section End -->
 
         <!-- Main Footer Start -->
         <?php include('include/footer.php'); ?>

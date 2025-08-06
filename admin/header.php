@@ -150,7 +150,7 @@ if (!isset($_SESSION['user'])) {
 											echo 'active';
 										} ?>">
 						<a href="client-logo.php">
-							<i class="fa fa-users"></i> <span>Manage Partner Logo</span>
+							<i class="fa fa-users"></i> <span>Manage Clients Logo</span>
 						</a>
 					</li>
 					<li class="treeview <?php if (($cur_page == 'package-category.php') || ($cur_page == 'package-category-add.php') || ($cur_page == 'package-category-edit.php') || ($cur_page == 'pachage-sub-category.php') || ($cur_page == 'pachage-sub-category-add.php') || ($cur_page == 'pachage-sub-category-edit.php') || ($cur_page == 'package-type.php') || ($cur_page == 'package-type-add.php') || ($cur_page == 'package-type-edit.php') || ($cur_page == 'package.php.php') || ($cur_page == 'package.php-edit.php') || ($cur_page == 'package.php-add.php')) {

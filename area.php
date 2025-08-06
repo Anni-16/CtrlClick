@@ -73,6 +73,35 @@ include('./admin/inc/config.php');
         #find_list .border-line {
             padding-left: 15px;
         }
+
+        .az-pagination {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .az-link {
+            display: inline-block;
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .az-link:hover,
+        .az-link.active {
+            background-color: #01395c;
+            color: #fff;
+            border-color: #01395c;
+        }
+
+        .border-line {
+            margin: 0 5px;
+            color: #01395c;
+        }
     </style>
 
 </head>
@@ -92,11 +121,11 @@ include('./admin/inc/config.php');
             <div class="banner-inner">
                 <div class="auto-container">
                     <div class="inner-container clearfix">
-                        <h1 id="yellow-color">Website Designing Services By Area – Complete Sitemap</h1>
+                        <h1 id="yellow-color">Serving You Locally with Expert Website Design</h1>
                         <div class="page-nav">
                             <ul class="bread-crumb clearfix">
                                 <li><a href="index.php">Home</a></li>
-                                <li class="active">Website Designing Services By Area – Complete Sitemap</li>
+                                <li class="active">Serving You Locally with Expert Website Design</li>
                             </ul>
                         </div>
                     </div>
@@ -114,49 +143,74 @@ include('./admin/inc/config.php');
                     <!-- State Area Name -->
                     <div class="tf-sp-2 flat-animate-tab" style="margin-bottom: 80px;">
                         <div class="container">
-                            <h3 class="mb-5" style=" border-bottom:1px solid #e4e4e4; padding-bottom: 30px;">Website Designing Services By Area – Complete Sitemap</h3>
+                            <h3 class="mb-5" style=" border-bottom:1px solid #e4e4e4; padding-bottom: 30px;">Serving You Locally with Expert Website Design</h3>
+                            <?php
+                            // Get selected letter from URL, default to 'A'
+                            $selectedLetter = isset($_GET['letter']) ? strtoupper($_GET['letter']) : 'A';
+
+                            // Validate the letter (A-Z or #)
+                            if (!preg_match('/^[A-Z]$/', $selectedLetter) && $selectedLetter !== '#') {
+                                $selectedLetter = 'A';
+                            }
+
+                            // Fetch area_name and url from database
+                            $statement = $pdo->prepare("SELECT area_name, url FROM tbl_area ORDER BY area_name ASC");
+                            $statement->execute();
+                            $areas = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                            // Group areas alphabetically
+                            $groupedAreas = [];
+                            foreach ($areas as $area) {
+                                $firstChar = strtoupper(substr($area['area_name'], 0, 1));
+                                if (!ctype_alpha($firstChar)) {
+                                    $firstChar = '#';
+                                }
+                                if (!isset($groupedAreas[$firstChar])) {
+                                    $groupedAreas[$firstChar] = [];
+                                }
+                                $groupedAreas[$firstChar][] = $area;
+                            }
+
+                            // Create full alphabet array
+                            $alphabet = range('A', 'Z');
+                            ?>
+
+                            <!-- Alphabetical Pagination -->
+                            <div class="row mb-4">
+                                <div class="col-lg-12 text-center">
+                                    <div class="az-pagination">
+                                        <?php foreach ($alphabet as $char) : ?>
+                                            <a href="?letter=<?= $char; ?>" class="az-link <?= ($char === $selectedLetter) ? 'active' : ''; ?>"><?= $char; ?></a>
+                                        <?php endforeach; ?>
+                                        <?php if (isset($groupedAreas['#'])) : ?>
+                                            <a href="?letter=#" class="az-link <?= ($selectedLetter === '#') ? 'active' : ''; ?>">#</a>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <?php
-                                    // Fetch area_name and url from database and group by first letter of area_name
-                                    $statement = $pdo->prepare("SELECT area_name, url FROM tbl_area ORDER BY area_name ASC");
-                                    $statement->execute();
-                                    $areas = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                                    // Group areas alphabetically
-                                    $groupedAreas = [];
-                                    foreach ($areas as $area) {
-                                        $firstChar = strtoupper(substr($area['area_name'], 0, 1));
-                                        if (!isset($groupedAreas[$firstChar])) {
-                                            $groupedAreas[$firstChar] = [];
-                                        }
-                                        $groupedAreas[$firstChar][] = $area; // Store full array
-                                    }
-                                    ?>
-
-                                    <div class="row">
-                                        <?php foreach ($groupedAreas as $letter => $areaList) { ?>
-                                            <div class="col-lg-12 pb-5">
-                                                <h6 class="pb-3 redColor" style="<?= ($letter !== array_key_first($groupedAreas)) ? 'border-top:1px solid #e4e4e4; padding-top: 30px;' : '' ?>">
-                                                    <strong><?= $letter; ?></strong>
-                                                </h6>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <ul id="find_list">
-                                                            <?php foreach ($areaList as $areaData) { ?>
-                                                                <li>
-                                                                    <a href="area-details.php?url=<?= urlencode($areaData['url']); ?>" class="border-right">
-                                                                        <?= $areaData['area_name']; ?>
-                                                                    </a>
-                                                                    <span class="border-line">|</span>
-                                                                </li>
-                                                            <?php } ?>
-                                                        </ul>
-                                                    </div>
+                                    <?php if (isset($groupedAreas[$selectedLetter])) { ?>
+                                        <div class="col-lg-12 pb-5">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <ul id="find_list">
+                                                        <?php foreach ($groupedAreas[$selectedLetter] as $areaData) { ?>
+                                                            <li>
+                                                                <a href="area-details.php?url=<?= urlencode($areaData['url']); ?>" class="border-right">
+                                                                    <?= ($areaData['area_name']); ?>
+                                                                </a>
+                                                                <span class="border-line">|</span>
+                                                            </li>
+                                                        <?php } ?>
+                                                    </ul>
                                                 </div>
                                             </div>
-                                        <?php } ?>
-                                    </div>
+                                        </div>
+                                    <?php } else { ?>
+                                        <p class="text-center">No areas found for this letter.</p>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

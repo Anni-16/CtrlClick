@@ -72,6 +72,35 @@ include('./admin/inc/config.php');
         #find_list .border-line {
             padding-left: 15px;
         }
+
+        .az-pagination {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .az-link {
+            display: inline-block;
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .az-link:hover,
+        .az-link.active {
+            background-color: #01395c;
+            color: #fff;
+            border-color: #01395c;
+        }
+
+        .border-line {
+            margin: 0 5px;
+            color: #01395c;
+        }
     </style>
 
 </head>
@@ -91,11 +120,11 @@ include('./admin/inc/config.php');
             <div class="banner-inner">
                 <div class="auto-container">
                     <div class="inner-container clearfix">
-                        <h1 id="yellow-color">Website Designing Services By City – Complete Sitemap</h1>
+                        <h1 id="yellow-color">Where We Offer Website Designing Services</h1>
                         <div class="page-nav">
                             <ul class="bread-crumb clearfix">
                                 <li><a href="index.php">Home</a></li>
-                                <li class="active">Website Designing Services By City – Complete Sitemap</li>
+                                <li class="active">Where We Offer Website Designing Services</li>
                             </ul>
                         </div>
                     </div>
@@ -113,51 +142,63 @@ include('./admin/inc/config.php');
                     <!-- State Area Name -->
                     <div class="tf-sp-2 flat-animate-tab" style="margin-bottom: 80px;">
                         <div class="container">
-                            <h3 class="mb-5" style=" border-bottom:1px solid #e4e4e4; padding-bottom: 30px;">Website Designing Services By City – Complete Sitemap</h3>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <?php
-                                    // Fetch area_name and url from database and group by first letter of area_name
-                                    $statement = $pdo->prepare("SELECT city_name, url FROM tbl_city ORDER BY city_name ASC");
-                                    $statement->execute();
-                                    $areas = $statement->fetchAll(PDO::FETCH_ASSOC);
+                            <h3 class="mb-5" style=" border-bottom:1px solid #e4e4e4; padding-bottom: 30px;">Where We Offer Website Designing Services</h3>
+                            <?php
+                            // Get selected letter from URL or default to 'A'
+                            $selectedLetter = isset($_GET['letter']) ? strtoupper($_GET['letter']) : 'A';
 
-                                    // Group areas alphabetically
-                                    $groupedAreas = [];
-                                    foreach ($areas as $area) {
-                                        $firstChar = strtoupper(substr($area['city_name'], 0, 1));
-                                        if (!isset($groupedAreas[$firstChar])) {
-                                            $groupedAreas[$firstChar] = [];
-                                        }
-                                        $groupedAreas[$firstChar][] = $area; // Store full array
-                                    }
-                                    ?>
+                            // Fetch city_name and url from database
+                            $statement = $pdo->prepare("SELECT city_name, url FROM tbl_city ORDER BY city_name ASC");
+                            $statement->execute();
+                            $cities = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                                    <div class="row">
-                                        <?php foreach ($groupedAreas as $letter => $areaList) { ?>
-                                            <div class="col-lg-12 pb-5">
-                                                <h6 class="pb-3 redColor" style="<?= ($letter !== array_key_first($groupedAreas)) ? 'border-top:1px solid #e4e4e4; padding-top: 30px;' : '' ?>">
-                                                    <strong><?= $letter; ?></strong>
-                                                </h6>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <ul id="find_list">
-                                                            <?php foreach ($areaList as $areaData) { ?>
-                                                                <li>
-                                                                    <a href="city-details.php?url=<?= urlencode($areaData['url']); ?>" class="border-right">
-                                                                        <?= $areaData['city_name']; ?>
-                                                                    </a>
-                                                                    <span class="border-line">|</span>
-                                                                </li>
-                                                            <?php } ?>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php } ?>
-                                    </div>
-                                </div>
+                            // Group cities alphabetically
+                            $groupedCities = [];
+                            foreach ($cities as $city) {
+                                $firstChar = strtoupper(substr($city['city_name'], 0, 1));
+                                if (!isset($groupedCities[$firstChar])) {
+                                    $groupedCities[$firstChar] = [];
+                                }
+                                $groupedCities[$firstChar][] = $city;
+                            }
+                            ?>
+
+                            <!-- Alphabetical Pagination Links -->
+                            <div class="az-pagination text-center mb-4">
+                                <?php foreach (range('A', 'Z') as $letter) { ?>
+                                    <a href="?letter=<?= $letter ?>" class="az-link <?= ($letter == $selectedLetter) ? 'active' : '' ?>">
+                                        <?= $letter ?>
+                                    </a>
+                                <?php } ?>
                             </div>
+
+
+                            <!-- Display Selected Group -->
+                            <div class="row">
+                                <?php if (isset($groupedCities[$selectedLetter])) { ?>
+                                    <div class="col-lg-12 pb-5">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <ul id="find_list">
+                                                    <?php foreach ($groupedCities[$selectedLetter] as $cityData) { ?>
+                                                        <li>
+                                                            <a href="city-details.php?url=<?= urlencode($cityData['url']); ?>" class="border-right">
+                                                                <?= $cityData['city_name']; ?>
+                                                            </a>
+                                                            <span class="border-line">|</span>
+                                                        </li>
+                                                    <?php } ?>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="col-lg-12">
+                                        <p>No cities found for letter <?= $selectedLetter; ?>.</p>
+                                    </div>
+                                <?php } ?>
+                            </div>
+
                         </div>
                     </div>
                     <!-- end Area Name -->

@@ -51,12 +51,10 @@
 
                                     foreach ($result as $row) :
                                         $plan_cat_name = ($row['plan_cat_name']);
-                                        $plan_cat_id = (int)$row['plan_cat_id'];
-
                                         if (!empty($plan_cat_name)) :
                                     ?>
                                             <li>
-                                                <a href="package-sub-cat.php?id=<?= $plan_cat_id ?>">
+                                                <a href="package-sub-cat.php?url=<?= $row['url']; ?>">
                                                     <?= $plan_cat_name ?>
                                                 </a>
                                             </li>

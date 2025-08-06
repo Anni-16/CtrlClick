@@ -1,15 +1,15 @@
 <?php
 include('admin/inc/config.php');
-if (isset($_GET['id'])) {
-    $plan_cat_id = $_GET['id'];
+if (isset($_GET['url'])) {
+    $url = $_GET['url'];
 
     // ✅ Updated to correct table and column
-    $statement = $pdo->prepare("SELECT * FROM tbl_plan_category WHERE plan_cat_id = ?");
-    $statement->execute([$plan_cat_id]);
+    $statement = $pdo->prepare("SELECT * FROM tbl_plan_category WHERE url = ? AND status = 1");
+    $statement->execute([$url]);
     $plan_cat = $statement->fetch(PDO::FETCH_ASSOC);
 
     if (!$plan_cat) {
-        header('location: index.php');
+        header('location: package-list.php');
         exit;
     }
 
@@ -116,12 +116,12 @@ if (isset($_GET['id'])) {
                                                     </h3>
                                                     <div class="pricing-card__bottom">
                                                         <ul>
-                                                            <li><a href="mailto:business@firstpointcreations.com">business@firstpointcreations.com</a></li>
-                                                            <li><a href="tel:+91-9871688800">+91-9871688800</a></li>
+                                                            <li><a href="mailto:sales@ctrlclick.com.au">sales@ctrlclick.com.au</a></li>
+                                                            <li><a href="tel:+61423964899">+61 423964899</a></li>
                                                         </ul>
                                                         <div class="theme-btn btn-style-one" style="margin-top: 30px;">
                                                             <i class="btn-curve"></i>
-                                                            <a href="package-details.php?id=<?= $sub_cat_id ?>"><span class="btn-title">View Details</span></a>
+                                                            <a href="package-type.php?id=<?= $sub_cat_id ?>"><span class="btn-title">View Details</span></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -135,9 +135,6 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
         </main>
-
-        <?php include('include/footer.php'); ?>
-
 
         <!-- Main Footer Start -->
         <?php include('include/footer.php'); ?>
