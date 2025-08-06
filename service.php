@@ -64,7 +64,6 @@ include('./admin/inc/config.php');
         #circle-icon {
             display: flex;
             justify-content: center;
-            padding-top: 50px;
         }
 
         #limit-text {
@@ -134,7 +133,7 @@ include('./admin/inc/config.php');
                                     <h5 style="margin-top:20px;">
                                         <a href="service-details.php?url=<?= ($ser_heading); ?>"><?= $ser_heading; ?></a>
                                     </h5>
-                                    <div class="text" id="limit-text"><?= $limitedContent; ?></div>
+                                    <div class="text" id="limit-text" style="color:#01395c;"><?= $limitedContent; ?></div>
                                     <div class="link-box" id="circle-icon">
                                         <a href="service-details.php?url=<?= $url; ?>" class="service-nine__link">
                                             <i class="fa fa-angle-right"></i>

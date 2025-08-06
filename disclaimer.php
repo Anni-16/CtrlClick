@@ -110,7 +110,7 @@ include('./admin/inc/config.php');
                                 <div class="inner-box">
                                     <div class="lower-box">
                                         <h4><?= $heading; ?></h4>
-                                        <div class="text">
+                                        <div class="text" style="color: #01395c;">
                                             <p><?= $content; ?></p>
                                         </div>
                                     </div>

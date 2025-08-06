@@ -80,7 +80,7 @@ include('admin/inc/config.php');
                             <div class="step" data-state="branchtype">
                                 <div class="question_title text-center">
                                     <h3 style="color: #01395c;">Packages List</h3>
-                                    <p style="padding-bottom: 30px;">Selection with Branch (First Branch). Web Development have a <strong>Second
+                                    <p style="padding-bottom: 30px; color: #01395c;">Selection with Branch (First Branch). Web Development have a <strong>Second
                                             Branch</strong>.</p>
                                 </div>
                                 <div class="row">

@@ -131,14 +131,14 @@ if (isset($_GET['url'])) {
                                 <div class="inner-box">
                                     <div class="lower-box">
                                         <h4>Website Designing In <?= $state_capital; ?></h4>
-                                        <div class="text">
+                                        <div class="text" style="color: #01395c;">
                                             <p>Website Development in Brisbane, Gold Coast & Sunshine Coast
                                                 As a leading <?= $state_capital; ?> website development company, Ctrl Click builds powerful, performance-driven websites tailored for local industries across Brisbane, Gold Coast, and the Sunshine Coast. From tourism operators to service-based businesses, we create fast, mobile-responsive, and visually compelling websites that help you connect, convert, and grow.
 
                                                 Proud to be recognized as an Australia trusted website design company, we combine clean code, local SEO strategy, and seamless functionality to ensure your site delivers results — not just traffic.</p>
                                         </div>
                                         <h5>Why Choose Ctrl Click?</h5>
-                                        <div class="text">
+                                        <div class="text"  style="color: #01395c;">
                                             <p>Australia’s trusted website design company
                                                 Secure, scalable, and future-ready
                                                 Proven results across industries

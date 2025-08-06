@@ -226,7 +226,7 @@ include('./admin/inc/config.php');
 													<img src="./images/my-image/icon/briefcase.png" alt="" width="100%">
 												</div>
 												<div class="col-lg-10">
-													<span style="font-size: 16px;"><strong style="font-size: 18px; color: #01395c;">
+													<span style="font-size: 16px; color:#01395c;"><strong style="font-size: 18px; color: #01395c;">
 															5000+</strong>
 														Accounts Handled</span>
 												</div>
@@ -239,7 +239,7 @@ include('./admin/inc/config.php');
 													<img src="./images/my-image/icon/multiple-users-silhouette.png" alt="" width="100%">
 												</div>
 												<div class="col-lg-10">
-													<span style="font-size: 16px;"><strong style="font-size: 18px; color: #01395c;">
+													<span style="font-size: 16px; color:#01395c;"><strong style="font-size: 18px; color: #01395c;">
 															90+</strong>
 														Team of Professionals</span>
 												</div>
@@ -252,7 +252,7 @@ include('./admin/inc/config.php');
 													<img src="./images/my-image/icon/earth.png" alt="" width="100%">
 												</div>
 												<div class="col-lg-10">
-													<span style="font-size: 16px;"><strong style="font-size: 18px; color: #01395c;">
+													<span style="font-size: 16px; color:#01395c;"><strong style="font-size: 18px; color: #01395c;">
 															25+ </strong>
 														Serving Countries</span>
 												</div>

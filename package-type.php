@@ -151,14 +151,14 @@ $sub_cat_name = $sub_row ? $sub_row['plan_sub_cat_name'] : "Packages";
                                         <img src="./images/my-image/rocket.png" alt="" style="padding-bottom: 10px;" width="70px"><br>
                                         <?= ($plan_name) ?>
                                     </h3>
-                                    <div class="pricing-card__bottom" style="padding: 20px;">
+                                    <div class="pricing-card__bottom" style="padding: 20px; color: #01395c;">
                                         <?= $descHtml ?>
-                                        <h3 class="pricing-card__amount mt-3">
+                                        <h3 class="pricing-card__amount mt-3" style="color: #01395c !important;">
                                             $<?= ($plan_price) ?> /-
                                             <br>
-                                            <span style="font-size: 25px;">Per <?= ($plan_duration) ?></span>
+                                            <span style="font-size: 25px; ">Per <?= ($plan_duration) ?></span>
                                         </h3>
-                                        <p style="font-size: 14px;">EXCLUSIVE OF ALL TAXES & PRICES ARE IN AUD</p>
+                                        <p style="font-size: 14px; color: #01395c;">EXCLUSIVE OF ALL TAXES & PRICES ARE IN AUD</p>
                                         <a class="theme-btn btn-style-one mt-3" href="contact.php">
                                             <i class="btn-curve"></i>
                                             <span class="btn-title">Buy Now</span>

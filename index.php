@@ -161,7 +161,7 @@
                             <h2 style="color: #01395c;">About Us<span class="dot">.</span></h2>
 
                             <div class="lower-text">
-                                <p style="color: #158cac;">
+                                <p style="color: #01395c;  text-align:justify">
                                     <?php
                                     // Limit content to 150 words
                                     $words = explode(' ', strip_tags($row['content']));
@@ -198,7 +198,7 @@
                         <div class="inner">
                             <div class="sec-title">
                                 <h2 style="text-align: center; ">Our Services <span class="dot">.</span></h2>
-                                <div class="lower-text" style="text-align: center; padding: 0; padding-bottom: 20px;">Ctrl Click is Australia’s trusted web design agency, delivering high-performance websites and end-to-end development solutions for businesses of all sizes. </div>
+                                <div class="lower-text" style="text-align: center; padding: 0; padding-bottom: 20px; color:#fff">Ctrl Click is Australia’s trusted web design agency, delivering high-performance websites and end-to-end development solutions for businesses of all sizes. </div>
                             </div>
                         </div>
                     </div>
@@ -244,7 +244,7 @@
             <div class="auto-container">
                 <div class="sec-title-two text-center">
                     <h2 style="font-weight: 400; text-transform: uppercase;">Latest Portfolio</h2>
-                    <div class="lower-text" style="text-align: center; padding: 0; padding-bottom: 20px; color: #158cac;">Custom websites, built to perform. Explore our latest work for Australian clients.</div>
+                    <div class="lower-text" style="text-align: center; padding: 0; padding-bottom: 20px; color: #01395c;">Custom websites, built to perform. Explore our latest work for Australian clients.</div>
                 </div>
                 <div class="row">
                     <?php
@@ -295,7 +295,7 @@
                         <div class="inner">
                             <div class="sec-title">
                                 <h2>We are standout <br>experts in business<span class="dot">.</span></h2>
-                                <div class="lower-text" style="color: #158cac;">We believe that success is achieved
+                                <div class="lower-text" style="color: #01395c;">We believe that success is achieved
                                     through a highly
                                     collaborative interaction, so that we can work together to identify and evaluate
                                     opportunities beyond your current operations. </div>
@@ -410,7 +410,7 @@
 
 
         <!-- Contact Form -->
-        <section class="about-section-two" id="contact">
+        <section class="about-section-two " id="contact">
             <div class="auto-container">
                 <div class="row clearfix">
                     <div class="left-col col-lg-6 col-md-12 col-sm-12">
@@ -429,7 +429,7 @@
                                             </div>
                                             <div class="col-lg-10">
                                                 <h5 style="margin: 0;">ANALYZE PROJECT</h5>
-                                                <p style="line-height: 25px;">First and foremost, we assess your
+                                                <p style="line-height: 25px; color:#01395c;">First and foremost, we assess your
                                                     project, its current stage,
                                                     competitors, and future goals.</p>
                                             </div>
@@ -448,7 +448,7 @@
                                             </div>
                                             <div class="col-lg-10">
                                                 <h5 style="margin: 0;">ANALYZE PROJECT</h5>
-                                                <p style="line-height: 25px;">First and foremost, we assess your
+                                                <p style="line-height: 25px;  color:#01395c;">First and foremost, we assess your
                                                     project, its current stage,
                                                     competitors, and future goals.</p>
                                             </div>
@@ -467,7 +467,7 @@
                                             </div>
                                             <div class="col-lg-10">
                                                 <h5 style="margin: 0;">ANALYZE PROJECT</h5>
-                                                <p style="line-height: 25px;">First and foremost, we assess your
+                                                <p style="line-height: 25px;  color:#01395c;">First and foremost, we assess your
                                                     project, its current stage,
                                                     competitors, and future goals.</p>
                                             </div>
@@ -556,7 +556,7 @@
             <div class="auto-container">
                 <div class="sec-title-two text-center">
                     <h2 style="font-weight: 400; text-transform: uppercase;">What Are People Say<span class="dot">.</span></h2>
-                    <div class="text">Authentic reviews from clients who rely on Ctrl Click for their digital success.</div>
+                    <div class="text" style="color:#01395c;">Authentic reviews from clients who rely on Ctrl Click for their digital success.</div>
                 </div><!-- /.sec-title-two -->
                 <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "spaceBetween": 0, "loop": true, "slidesPerGroup": 2,
                     "pagination": {
@@ -631,12 +631,12 @@
         </section>
 
         <!--Clients Section-->
-        <section class="sponsors-section" style="background-color: #01395c;">
+        <section class="sponsors-section we-do-section"  >
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 style="font-weight: 400; text-transform: uppercase; text-align: center; color: #ffffff; margin: 0;">
+                    <h2 style="font-weight: 400; text-transform: uppercase; text-align: center;   margin: 0;">
                         Our Clients<span class="dot">.</span></h2>
-                    <div class="text" style="text-align: center; color: #ffffff; ">Ctrl Click is acknowledged by clients and partners as one of the best web design companies in Australia.</div>
+                    <div class="text" style="text-align: center;  color:#01395c; " >Ctrl Click is acknowledged by clients and partners as one of the best web design companies in Australia.</div>
                 </div>
             </div>
             <div class="sponsors-outer" style="margin-top: 50px;">
@@ -653,7 +653,7 @@
                             <div class="slide-item">
                                 <figure class="image-box">
                                     <a href="#">
-                                        <img src="./admin/uploads/client-logo/<?= $row['client_image']; ?>" alt="<?= $row['client_name']; ?>" style="width:100%; height:100px">
+                                        <img src="./admin/uploads/client-logo/<?= $row['client_image']; ?>" alt="<?= $row['client_name']; ?>" style="width:100%; height:100px;  opacity: 1 !important;">
                                     </a>
                                 </figure>
                             </div>
@@ -722,7 +722,7 @@
             <div class="auto-container">
                 <div class="sec-title-two text-center">
                     <h2 style="font-weight: 400;">OUR BLOG</h2>
-                    <div class="text">Control Click’s guide to building better websites and stronger online presence.</div>
+                    <div class="text" style="color:#01395c;">Control Click’s guide to building better websites and stronger online presence.</div>
                 </div>
                 <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "spaceBetween": 0, "loop": true, "slidesPerGroup": 2,
                     "pagination": {

@@ -92,7 +92,7 @@ if (isset($_GET['url'])) {
                             <div class="step" data-state="branchtype">
                                 <div class="question_title">
                                     <h3 style="color: #01395c;" id="header"><?= $cat_name; ?></h3>
-                                    <p style="padding-bottom: 30px;">Explore subcategories under <?= $cat_name; ?>.</p>
+                                    <p style="padding-bottom: 30px; color: #01395c;">Explore subcategories under <?= $cat_name; ?>.</p>
                                 </div>
 
                                 <div class="row">

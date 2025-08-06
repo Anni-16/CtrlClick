@@ -72,7 +72,7 @@ include('./admin/inc/config.php');
         <!--End Banner Section -->
 
         <!-- Gallery Section -->
-   <section class="gallery-section">
+        <section class="gallery-section">
             <div class="auto-container">
                 <div class="mixitup-gallery">
                     <!-- Filter -->
@@ -148,7 +148,6 @@ include('./admin/inc/config.php');
                 </div>
             </div>
         </section>
-
         <!-- Portfolio Section End -->
 
         <!-- Include jQuery and MixItUp (If not already included) -->

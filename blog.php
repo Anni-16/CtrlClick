@@ -105,13 +105,13 @@ include('./admin/inc/config.php');
                                 <div class="lower-box">
                                     <div class="post-meta">
                                         <ul class="clearfix">
-                                            <li><span class="far fa-clock"></span> <?= $formattedDate; ?></li>
-                                            <li><span class="far fa-user-circle"></span> Admin</li>
+                                            <li style="color: #01395c;"><span class="far fa-clock"></span> <?= $formattedDate; ?></li>
+                                            <li style="color: #01395c;"><span class="far fa-user-circle"></span> Admin</li>
                                         </ul>
                                     </div>
                                     <h4><a href="blog-details.php?url=<?= $blogUrl; ?>"><?= $b_name; ?></a></h4>
-                                    <div class="text" style="color:#158cac"><?= $limitedContent; ?></div>
-                                    <div class="link-box">
+                                    <div class="text" style="color: #01395c;"><?= $limitedContent; ?></div>
+                                    <div class="link-box " >
                                         <a class="theme-btn" href="blog-details.php?url=<?= $blogUrl; ?>">
                                             <span class="flaticon-next-1"></span>
                                         </a>

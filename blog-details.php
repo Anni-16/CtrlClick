@@ -54,7 +54,7 @@ if (isset($_GET['url'])) {
     <meta name="title" content="<?= $b_meta_title; ?>">
     <meta name="keywords" content="<?= $b_meta_keyword; ?>">
     <meta name="description" content="<?= $b_meta_desc; ?>">
-
+    
     <!-- Canonical Tag -->
     <link rel="canonical" href="<?= $canonicalUrl; ?>" />
 
@@ -155,12 +155,12 @@ if (isset($_GET['url'])) {
                                     <div class="lower-box">
                                         <div class="post-meta">
                                             <ul class="clearfix">
-                                                <li><span class="far fa-clock"></span> <?= $formattedDate; ?></li>
-                                                <li><span class="far fa-user-circle"></span> Admin</li>
+                                                <li style="color: #01395c;"><span class="far fa-clock"></span> <?= $formattedDate; ?></li>
+                                                <li style="color: #01395c;"><span class="far fa-user-circle"></span> Admin</li>
                                             </ul>
                                         </div>
                                         <h4><?= $b_name; ?></h4>
-                                        <div class="text">
+                                        <div class="text" style="color: #01395c;">
                                             <p><?= $b_description; ?></p>
                                         </div>
                                     </div>
@@ -172,7 +172,7 @@ if (isset($_GET['url'])) {
                     <!--Sidebar Side-->
                     <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
                         <aside class="sidebar blog-sidebar">
-                            <!--Sidebar Widget-->
+                            
                             <div class="sidebar-widget recent-posts">
                                 <div class="widget-inner" style="background-color: #01395c;">
                                     <div class="sidebar-title">
@@ -195,7 +195,7 @@ if (isset($_GET['url'])) {
                                                 </figure>
                                             </a>
                                             <h5 class="text">
-                                                <a href="blog-details.php?url=<?= $row['url']; ?>" style="color: white !important;"><?= $b_name; ?>
+                                                <a href="blog-details.php?url=<?= $row['url'] ; ?>" style="color: white !important;"><?= $b_name; ?>
                                                     <br><span><?= $formattedDate; ?></span></a>
                                             </h5>
                                         </div>
@@ -218,7 +218,7 @@ if (isset($_GET['url'])) {
                                             $i++;
                                             $b_name = $row['b_name'];
                                         ?>
-                                            <li><a href="blog-details.php?url=<?= $row['url']; ?>" style="color: #ffffff;"><?= $b_name; ?></a></li>
+                                            <li><a href="blog-details.php?url=<?= $row['url'] ; ?>" style="color: #ffffff;"><?= $b_name; ?></a></li>
                                         <?php } ?>
                                         <li><a href="blog.php" style="color: #ffffff;">View All </a></li>
                                     </ul>

@@ -120,18 +120,18 @@ foreach ($result as $row) {
                     <div class="text-column col-xl-6 col-lg-12 col-md-12 col-sm-12">
                         <div class="inner">
                             <div class="sec-title">
-                                <h2><?= $heading; ?></h2>
+                                <h1 class="h1"><?= $heading; ?></h1>
                                 <div class="lower-text"><?= $sub_heading; ?></div>
                             </div>
-                            <div class="text">
-                                <p><?= $content; ?></p>
+                            <div style="color: #01395c !important;" >
+                                <p style="color: #01395c !important;"><?= $content; ?></p>
                             </div>
                         </div>
                     </div>
                     <div class="text-column col-xl-12 col-lg-12 col-md-12 col-sm-12">
                         <div class="inner">
-                            <div class="text">
-                                <p><?= $description; ?></p>
+                            <div   style="color: #01395c;" >
+                                <p style="color:#01395c  !important; "><?= $description; ?></p>
                             </div>
                         </div>
                     </div>
@@ -145,7 +145,9 @@ foreach ($result as $row) {
                 <div class="row">
                     <div class="col-lg-12">
                         <h2 style="text-align: center; color: #ffffff;">OUR MISSION</h2>
-                        <p style="text-align: center; color: #ffffff;"><?= $our_mission; ?></p>
+                       <div class="" style="color: #fff;">
+                         <p style="text-align: center; color: #ffffff;"><?= $our_mission; ?></p>
+                       </div>
                     </div>
                 </div>
             </div>
@@ -157,8 +159,10 @@ foreach ($result as $row) {
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2 style="text-align: center; ">OUR Vision</h2>
-                        <p style="text-align: center;  "><?= $our_vision; ?></p>
+                        <h2 style="text-align: center; ">OUR VISION</h2>
+                        <div class="" style="color: #01395c;">
+                            <p style="text-align: center;  "><?= $our_vision; ?></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -174,7 +178,7 @@ foreach ($result as $row) {
                         <div class="inner">
                             <div class="sec-title">
                                 <h2 style="text-align: center; ">Our Services <span class="dot">.</span></h2>
-                                <div class="lower-text" style="text-align: center; padding: 0; padding-bottom: 20px;">We
+                                <div class="lower-text" style="text-align: center; padding: 0; padding-bottom: 20px; color:#fff;">We
                                     are committed to
                                     providing our
                                     customers with exceptional
@@ -226,7 +230,7 @@ foreach ($result as $row) {
             <div class="auto-container">
                 <div class="sec-title-two text-center">
                     <h2 style="font-weight: 400;">Customer feedbacks<span class="dot">.</span></h2>
-                    <div class="text">Lorem Ipsum is simply proin gravida nibh vel velit auctor aliquet.
+                    <div class="text" style="color: #01395c;">Lorem Ipsum is simply proin gravida nibh vel velit auctor aliquet.
                         Aenean sollicitudin, lorem is simply free text quis bibendum.</div>
                 </div>
                 <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "spaceBetween": 0, "loop": true, "slidesPerGroup": 2,

@@ -130,14 +130,14 @@ if (isset($_GET['url'])) {
                                 <div class="inner-box">
                                     <div class="lower-box">
                                         <h4>Website Designing In <?= $city_name; ?></h4>
-                                        <div class="text">
+                                        <div class="text"  style="color: #01395c;">
                                             <p>Website Development in Brisbane, Gold Coast & Sunshine Coast
                                                 As a leading <?= $city_name; ?> website development company, Ctrl Click builds powerful, performance-driven websites tailored for local industries across Brisbane, Gold Coast, and the Sunshine Coast. From tourism operators to service-based businesses, we create fast, mobile-responsive, and visually compelling websites that help you connect, convert, and grow.
 
                                                 Proud to be recognized as an Australia trusted website design company, we combine clean code, local SEO strategy, and seamless functionality to ensure your site delivers results — not just traffic.</p>
                                         </div>
                                         <h5>Why Choose Ctrl Click?</h5>
-                                        <div class="text">
+                                        <div class="text"  style="color: #01395c;">
                                             <p>Australia’s trusted website design company
                                                 Secure, scalable, and future-ready
                                                 Proven results across industries
@@ -160,7 +160,7 @@ if (isset($_GET['url'])) {
                                     </div>
                                     <ul>
                                         <?php
-                                        $area_stmt = $pdo->prepare("SELECT * FROM tbl_area WHERE city_id = ? ORDER BY area_name ASC");
+                                        $area_stmt = $pdo->prepare("SELECT * FROM tbl_area WHERE city_id = ? ORDER BY area_name ASC ");
                                         $area_stmt->execute([$city_id]);
                                         $areas = $area_stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -168,6 +168,7 @@ if (isset($_GET['url'])) {
                                         ?>
                                             <li><a href="area-details.php?url=<?= $area['url']; ?>" style="color: #ffffff;"><?= $area['area_name']; ?></a></li>
                                         <?php } ?>
+                                           <li><a href="area.php" style="color: #ffffff;">View All</a></li>
                                     </ul>
                                 </div>
                             </div>

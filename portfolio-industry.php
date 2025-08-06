@@ -115,7 +115,9 @@ if (isset($_GET['id'])) {
                     <!--Filter-->
                     <div class="filters centered clearfix">
                         <ul class="filter-tabs filter-btns clearfix">
-                            <li class="active filter" data-role="button" data-filter="all"><a href="portfolio.php">All</a></li>
+                            <li class="active filter" data-role="button" data-filter="all">
+                                <a href="portfolio.php">All</a>
+                            </li>
                             <?php
                             // Fetch all states for filter buttons
                             $statement = $pdo->prepare("SELECT * FROM tbl_state ORDER BY state_id");
