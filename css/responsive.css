@@ -92,9 +92,9 @@
     padding-bottom: 20px;
   }
 
-  .main-header.fixed-header .nav-outer .mobile-nav-toggler {
+  /* .main-header.fixed-header .nav-outer .mobile-nav-toggler {
     margin-top: 20px;
-  }
+  } */
 
   .header-style-two.fixed-header .nav-outer .mobile-nav-toggler {
     color: #fff;
@@ -1415,9 +1415,9 @@
     order: 1;
   }
 
-  .main-header .header-upper .inner-container {
+  /* .main-header .header-upper .inner-container {
     display: flex;
-  }
+  } */
 }
 
 

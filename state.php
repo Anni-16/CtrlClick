@@ -138,12 +138,15 @@ if (isset($_GET['url'])) {
                                                 Proud to be recognized as an Australia trusted website design company, we combine clean code, local SEO strategy, and seamless functionality to ensure your site delivers results — not just traffic.</p>
                                         </div>
                                         <h5>Why Choose Ctrl Click?</h5>
-                                        <div class="text"  style="color: #01395c;">
-                                            <p>Australia’s trusted website design company
-                                                Secure, scalable, and future-ready
-                                                Proven results across industries
-                                                Specialists in WordPress, Shopify, Webflow & custom CMS
-                                                Fast, responsive, and SEO-optimized</p>
+                                        <div class="text" style="color: #01395c;">
+                                            <p>
+                                                ⦁ Australia’s Trusted Web Design Partner <br>
+                                                ⦁ Secure, Scalable & Future-Ready<br>
+                                                ⦁ Proven Results Across Industries<br>
+                                                ⦁ Experts in WordPress, Shopify, Webflow & Custom CMS<br>
+                                                ⦁ Fast, Responsive & SEO-Optimized<br>
+
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +160,7 @@ if (isset($_GET['url'])) {
                             <div class="sidebar-widget archives">
                                 <div class="widget-inner" style="background-color: #01395c !important;">
                                     <div class="sidebar-title">
-                                        <h4 style="color: white;"><?= $state_capital;?> Belong - City </h4>
+                                        <h4 style="color: white;"><?= $state_capital; ?> Belong - City </h4>
                                     </div>
                                     <ul>
                                         <?php
@@ -169,8 +172,8 @@ if (isset($_GET['url'])) {
                                         ?>
 
                                             <li><a href="city-details.php?url=<?= $city['url']; ?>" style="color: #ffffff;"><?= $city['city_name']; ?></a></li>
-                                            <?php } ?>
-                                            <li><a href="city.php" style="color: #ffffff;">View All</a></li>
+                                        <?php } ?>
+                                        <li><a href="city.php" style="color: #ffffff;">View All</a></li>
                                     </ul>
                                 </div>
                             </div>

@@ -138,11 +138,14 @@ if (isset($_GET['url'])) {
                                         </div>
                                         <h5>Why Choose Ctrl Click?</h5>
                                         <div class="text"  style="color: #01395c;">
-                                            <p>Australia’s trusted website design company
-                                                Secure, scalable, and future-ready
-                                                Proven results across industries
-                                                Specialists in WordPress, Shopify, Webflow & custom CMS
-                                                Fast, responsive, and SEO-optimized</p>
+                                        <p>
+                                                ⦁ Australia’s Trusted Web Design Partner <br>
+                                                ⦁ Secure, Scalable & Future-Ready<br>
+                                                ⦁ Proven Results Across Industries<br>
+                                                ⦁ Experts in WordPress, Shopify, Webflow & Custom CMS<br>
+                                                ⦁ Fast, Responsive & SEO-Optimized<br>
+
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

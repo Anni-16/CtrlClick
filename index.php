@@ -32,9 +32,6 @@
     <!-- Responsive File -->
     <link href="css/responsive.css" rel="stylesheet">
     <link href="css/mycss.css" rel="stylesheet">
-
-
-
     <!-- Color css -->
     <link rel="stylesheet" id="jssDefault" href="css/colors/color-default.css">
 
@@ -49,6 +46,10 @@
 
 
     <style>
+        #contact-form-bg {
+            background-color: rgb(1, 57, 92);
+        }
+
         .map-australia {
             width: 100%;
             height: auto;
@@ -59,6 +60,40 @@
 
         .text-left {
             text-align: left ! important;
+        }
+
+        @media screen and (max-width:480px) { 
+            #service-icon {
+                font-size: 40px !important;
+                margin-top: 50px !important;
+                margin-right: 30px !important;
+            }
+
+            #services-heading{
+                padding-top: 30px;
+            }
+
+            .service-block .inner-box {
+                padding: 30px 20px;
+            }
+
+            #portfolio-mobile {
+                height: 200px !important;
+            }
+
+            .banner-carousel h1 {
+                font-size: 50px !important;
+            }
+
+            .counter-block .inner-box {
+                padding-left: 0;
+            }
+
+            .counter-block .inner-box h4 {
+                margin-top: 120px !important;
+                text-align: center;
+                margin-left: -20px;
+            }
         }
     </style>
 </head>
@@ -161,7 +196,7 @@
                             <h2 style="color: #01395c;">About Us<span class="dot">.</span></h2>
 
                             <div class="lower-text">
-                                <p style="color: #01395c;  text-align:justify">
+                                <p style="color: #01395c;  text-align:justify; " class="text-uppercase font-teko">
                                     <?php
                                     // Limit content to 150 words
                                     $words = explode(' ', strip_tags($row['content']));
@@ -198,7 +233,7 @@
                         <div class="inner">
                             <div class="sec-title">
                                 <h2 style="text-align: center; ">Our Services <span class="dot">.</span></h2>
-                                <div class="lower-text" style="text-align: center; padding: 0; padding-bottom: 20px; color:#fff">Ctrl Click is Australia’s trusted web design agency, delivering high-performance websites and end-to-end development solutions for businesses of all sizes. </div>
+                                <div class="lower-text text-uppercase" style="text-align: center; padding: 0; padding-bottom: 20px; color:#fff">Ctrl Click is Australia’s trusted web design agency, delivering high-performance websites and end-to-end development solutions for businesses of all sizes. </div>
                             </div>
                         </div>
                     </div>
@@ -215,15 +250,15 @@
                         $ser_image = $row['ser_image'];
                     ?>
                         <!--Service Block-->
-                        <div class="service-block col-xl-3 col-lg-6 col-md-6 col-sm-12 wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                        <div class="service-block col-xl-3 col-lg-6 col-md-6 col-sm-6 col-6 wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                             <div class="inner-box">
                                 <div class="bottom-curve"></div>
                                 <a href="service-details.php?url=<?= $row['url']; ?>">
                                     <div class="icon-box">
-                                        <i class="<?= $ser_icon; ?> service-icon-style" style="font-size:70px;"></i>
+                                        <i class="<?= $ser_icon; ?> service-icon-style" style="font-size:70px;" id="service-icon"></i>
                                     </div>
                                 </a>
-                                <h6><a href="service-details.php?url=<?= $row['url']; ?>"><?= $ser_heading; ?></a></h6>
+                                <h6 id="services-heading"><a href="service-details.php?url=<?= $row['url']; ?>"><?= $ser_heading; ?></a></h6>
                             </div>
                         </div>
                     <?php } ?>
@@ -244,20 +279,20 @@
             <div class="auto-container">
                 <div class="sec-title-two text-center">
                     <h2 style="font-weight: 400; text-transform: uppercase;">Latest Portfolio</h2>
-                    <div class="lower-text" style="text-align: center; padding: 0; padding-bottom: 20px; color: #01395c;">Custom websites, built to perform. Explore our latest work for Australian clients.</div>
+                    <div class="lower-text text-uppercase" style="text-align: center; padding: 0; padding-bottom: 20px; color: #01395c;">Custom websites, built to perform. Explore our latest work for Australian clients.</div>
                 </div>
                 <div class="row">
                     <?php
                     $i = 0;
-                    $statement = $pdo->prepare("SELECT * FROM tbl_portfolio WHERE p_is_featured = 1  LIMIT 6");
+                    $statement = $pdo->prepare("SELECT * FROM tbl_portfolio WHERE p_is_featured = 1  LIMIT 4");
                     $statement->execute();
                     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($result as $row) {
                         $i++;
                     ?>
-                        <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="col-12 col-md-6 col-lg-6">
                             <div class="gallery-item-three">
-                                <img src="./admin/uploads/portfolio/<?= $row['p_image']; ?>" alt="<?= $row['p_name']; ?>" style="width: 100%; height:300px;">
+                                <img src="./admin/uploads/portfolio/<?= $row['p_image']; ?>" alt="<?= $row['p_name']; ?>" style="width: 100%; height:300px;" id="portfolio-mobile">
                                 <div class="gallery-item-three__content">
                                     <p>Visit Website</p>
                                     <h3><a href="portfolio-details.php?url=<?= ($row['p_name']); ?>"><?= $row['p_name']; ?></a></h3>
@@ -285,7 +320,7 @@
 
                 <div class="row">
                     <h2 style="text-align: center; padding: 0; margin: 0;">FAQ</h2>
-                    <div class="lower-text" style="text-align: center; padding: 0; padding-bottom: 30px; color: #01395c;">Want to make your brand stand out online and attract more customers through your website?</div>
+                    <div class="lower-text text-uppercase" style="text-align: center; padding: 0; padding-bottom: 30px; color: #01395c;">Want to make your brand stand out online and attract more customers through your website?</div>
                 </div>
 
                 <div class="row clearfix">
@@ -295,14 +330,14 @@
                         <div class="inner">
                             <div class="sec-title">
                                 <h2>We are standout <br>experts in business<span class="dot">.</span></h2>
-                                <div class="lower-text" style="color: #01395c;">We believe that success is achieved
+                                <div class="lower-text text-uppercase" style="color: #01395c;">We believe that success is achieved
                                     through a highly
                                     collaborative interaction, so that we can work together to identify and evaluate
                                     opportunities beyond your current operations. </div>
                             </div>
                             <div class="counter">
                                 <div class="row clearfix">
-                                    <div class="counter-block col-lg-6 col-md-6 col-sm-12">
+                                    <div class="counter-block col-lg-6 col-md-6 col-6">
                                         <div class="inner-box">
                                             <div class="graph-outer">
                                                 <input type="text" class="dial" data-fgColor="#ffaa17" data-bgColor="none" data-width="140" data-height="140" data-linecap="normal" value="90" data-thickness="0.050">
@@ -311,7 +346,7 @@
                                             <h4>Quality <br>Services</h4>
                                         </div>
                                     </div>
-                                    <div class="counter-block col-lg-6 col-md-6 col-sm-12">
+                                    <div class="counter-block col-lg-6 col-md-6 col-6">
                                         <div class="inner-box">
                                             <div class="graph-outer">
                                                 <input type="text" class="dial" data-fgColor="#ffaa17" data-bgColor="none" data-width="140" data-height="140" data-linecap="normal" value="50" data-thickness="0.050">
@@ -362,11 +397,11 @@
 
                 <div class="row">
                     <h2 style="text-align: center; padding: 0; margin: 0; text-transform: uppercase;">Reach Out</h2>
-                    <div class="lower-text" style="text-align: center; padding: 0; padding-bottom: 30px; color: #ffffff;">Bring your vision online with Ctrl Click let’s build your dream website together</div>
+                    <div class="lower-text text-uppercase" style="text-align: center; padding: 0; padding-bottom: 30px; color: #ffffff;">Bring your vision online with Ctrl Click let’s build your dream website together</div>
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div class="col-6 col-md-6 col-lg-3">
                         <div class="funfact-six__item">
                             <i class="funfact-six__icon flaticon-architect"></i>
                             <h3 class="funfact-six__count count-box"><span class="count-text" data-stop="20" data-speed="1500">0+</span>+
@@ -374,7 +409,7 @@
                             <p class="funfact-six__text">YEARS EXPERIENCE</p>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div class="col-6 col-md-6 col-lg-3">
                         <?php
                         $statement = $pdo->prepare("SELECT * FROM tbl_portfolio");
                         $statement->execute();
@@ -387,7 +422,7 @@
                             <p class="funfact-six__text">Project Completed</p>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div class="col-6 col-md-6 col-lg-3">
                         <div class="funfact-six__item">
                             <i class="funfact-six__icon flaticon-buildings"></i>
                             <h3 class="funfact-six__count count-box"><span class="count-text" data-stop="200" data-speed="1500">0</span>
@@ -395,7 +430,7 @@
                             <p class="funfact-six__text">Service Providing</p>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div class="col-6 col-md-6 col-lg-3">
                         <div class="funfact-six__item">
                             <i class="funfact-six__icon flaticon-satisfaction"></i>
                             <h3 class="funfact-six__count count-box"><span class="count-text" data-stop="976" data-speed="1500">0</span>0+
@@ -419,7 +454,7 @@
                                 <h2>WE ARE TRUSTED BY MORE THAN 500 CLIENTS<span class="dot">.</span></h2>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 col-6 " style="margin-top: 20px;">
                                     <div class="card" id="contact-card">
                                         <div class="row">
                                             <div class="col-lg-2">
@@ -438,7 +473,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12" style="margin-top: 20px;">
+                                <div class="col-lg-12 col-6" style="margin-top: 20px;">
                                     <div class="card" id="contact-card">
                                         <div class="row">
                                             <div class="col-lg-2">
@@ -457,7 +492,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12" style="margin-top: 20px;">
+                                <div class="col-lg-12 col-6" style="margin-top: 20px;">
                                     <div class="card" id="contact-card">
                                         <div class="row">
                                             <div class="col-lg-2">
@@ -480,7 +515,7 @@
                     </div>
                     <div class="right-col col-xl-6 col-lg-6 col-md-12 col-sm-12 get-quote-section">
                         <div class="inner">
-                            <div class="form-box wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms" style="background-color: #01395c;">
+                            <div class="form-box wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms" style="background-color: #01395c !important;" id="contact-form-bg">
                                 <div class="default-form login_form2">
                                     <h4 style="color: #ffffff;"> Get a free quote <span>.</span></h4>
                                     <form method="post" action="">
@@ -556,7 +591,7 @@
             <div class="auto-container">
                 <div class="sec-title-two text-center">
                     <h2 style="font-weight: 400; text-transform: uppercase;">What Are People Say<span class="dot">.</span></h2>
-                    <div class="text" style="color:#01395c;">Authentic reviews from clients who rely on Ctrl Click for their digital success.</div>
+                    <div class="text text-uppercase" style="color:#01395c;">Authentic reviews from clients who rely on Ctrl Click for their digital success.</div>
                 </div><!-- /.sec-title-two -->
                 <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "spaceBetween": 0, "loop": true, "slidesPerGroup": 2,
                     "pagination": {
@@ -631,12 +666,12 @@
         </section>
 
         <!--Clients Section-->
-        <section class="sponsors-section we-do-section"  >
+        <section class="sponsors-section we-do-section">
             <div class="row">
                 <div class="col-lg-12">
                     <h2 style="font-weight: 400; text-transform: uppercase; text-align: center;   margin: 0;">
                         Our Clients<span class="dot">.</span></h2>
-                    <div class="text" style="text-align: center;  color:#01395c; " >Ctrl Click is acknowledged by clients and partners as one of the best web design companies in Australia.</div>
+                    <div class="text text-uppercase" style="text-align: center;  color:#01395c; ">Ctrl Click is acknowledged by clients and partners as one of the best web design companies in Australia.</div>
                 </div>
             </div>
             <div class="sponsors-outer" style="margin-top: 50px;">
@@ -670,7 +705,7 @@
                     <div class="col-lg-12">
                         <h2 style="font-weight: 400; text-transform: uppercase; text-align: center; color: #ffffff; margin: 0;">
                             AERA WE ARE SERVE<span class="dot">.</span></h2>
-                        <div class="text" style="text-align: center; color: #ffffff; ">Ctrl Click is acknowledged by clients and partners as one of the best web design companies in Australia.</div>
+                        <div class="text text-uppercase" style="text-align: center; color: #ffffff; ">Ctrl Click is acknowledged by clients and partners as one of the best web design companies in Australia.</div>
                     </div>
                 </div>
 
@@ -682,7 +717,7 @@
 
                     foreach ($states as $state) {
                     ?>
-                        <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="col-6 col-md-6 col-lg-3">
                             <a href="state.php?url=<?= $state['state_cap_url']; ?>">
                                 <div class="funfact-six__item">
                                     <i class="funfact-six__icon flaticon-architect"></i>
@@ -722,7 +757,7 @@
             <div class="auto-container">
                 <div class="sec-title-two text-center">
                     <h2 style="font-weight: 400;">OUR BLOG</h2>
-                    <div class="text" style="color:#01395c;">Control Click’s guide to building better websites and stronger online presence.</div>
+                    <div class="text text-uppercase" style="color:#01395c;">Control Click’s guide to building better websites and stronger online presence.</div>
                 </div>
                 <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "spaceBetween": 0, "loop": true, "slidesPerGroup": 2,
                     "pagination": {

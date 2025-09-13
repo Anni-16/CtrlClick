@@ -110,7 +110,7 @@ include('./admin/inc/config.php');
                                         </ul>
                                     </div>
                                     <h4><a href="blog-details.php?url=<?= $blogUrl; ?>"><?= $b_name; ?></a></h4>
-                                    <div class="text" style="color: #01395c;"><?= $limitedContent; ?></div>
+                                    <div class="text text-uppercase" style="color: #01395c;"><?= $limitedContent; ?></div>
                                     <div class="link-box " >
                                         <a class="theme-btn" href="blog-details.php?url=<?= $blogUrl; ?>">
                                             <span class="flaticon-next-1"></span>

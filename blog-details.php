@@ -1,60 +1,40 @@
 <?php
 include('./admin/inc/config.php');
-
 // Check for 'url' parameter in GET request
 if (isset($_GET['url'])) {
     $url = $_GET['url'];
 
     // Prepare SQL statement to fetch blog details by URL
-    $statement = $pdo->prepare("SELECT * FROM tbl_blog WHERE url = ? AND status = 1");
+    $statement = $pdo->prepare("SELECT * FROM tbl_area WHERE url = ?");
     $statement->execute([$url]);
     $blog = $statement->fetch(PDO::FETCH_ASSOC);
 
     // If blog not found, redirect to main blog listing page
     if (!$blog) {
-        header('Location: blog.php');
+        header('Location: area.php');
         exit;
     }
-
     // Assign Blog Details
-    $b_name         = $blog['b_name'];
-    $b_image        = $blog['b_image'];
-    $b_description  = $blog['b_description'];
-    $b_meta_title   = $blog['b_meta_title'];
-    $b_meta_keyword = $blog['b_meta_keyword'];
-    $b_meta_desc    = $blog['b_meta_desc'];
-    $create_at      = $blog['created_at'];
+    $area_id = $blog['area_id'];
+    $area_name = $blog['area_name'];
 
     // Canonical URL (optional)
-    $canonicalUrl = "https://ctrlclick.com.au/blog-details.php?url=" . urlencode($blog['url']);
-
-    // Format Date
-    $formattedDate = date("j F Y", strtotime($create_at));
+    $canonicalUrl = "https://ctrlclick.com.au/area-details.php?url=" . urlencode($blog['url']);
 } else {
     // Redirect if 'url' parameter is missing
-    header('Location: blog.php');
+    header('Location: area.php');
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title><?= !empty($b_meta_title) ? $b_meta_title : $b_name; ?></title>
+    <title>CtrlClick - Smart Web Development Agency | Australia </title>
+    <meta name="description" content="Terms & Condition | Smart Web Design Agency| Australia">
+    <meta name="keywords" content="Terms & Condition | Smart Web Design Agency| Australia">
 
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="author" content="DexignZone">
-    <meta name="robots" content="index, follow">
-    <meta name="format-detection" content="telephone=no">
-
-    <meta name="title" content="<?= $b_meta_title; ?>">
-    <meta name="keywords" content="<?= $b_meta_keyword; ?>">
-    <meta name="description" content="<?= $b_meta_desc; ?>">
-    
     <!-- Canonical Tag -->
     <link rel="canonical" href="<?= $canonicalUrl; ?>" />
 
@@ -125,12 +105,11 @@ if (isset($_GET['url'])) {
             <div class="banner-inner">
                 <div class="auto-container">
                     <div class="inner-container clearfix">
-                        <h1 id="yellow-color"><?= $b_name; ?></h1>
+                        <h1 id="yellow-color">Website Designing In <?= $area_name; ?> </h1>
                         <div class="page-nav">
                             <ul class="bread-crumb clearfix">
                                 <li><a href="index.php">Home</a></li>
-                                <li><a href="blog.php">Blog</a></li>
-                                <li class="active"><?= $b_name; ?></li>
+                                <li class="active">Website Designing In <?= $area_name; ?> </li>
                             </ul>
                         </div>
                     </div>
@@ -149,19 +128,24 @@ if (isset($_GET['url'])) {
                             <!--News Block-->
                             <div class="post-details">
                                 <div class="inner-box">
-                                    <div class="image-box">
-                                        <img src="./admin/uploads/blog/<?= $b_image; ?>" alt="<?= $b_name; ?>">
-                                    </div>
                                     <div class="lower-box">
-                                        <div class="post-meta">
-                                            <ul class="clearfix">
-                                                <li style="color: #01395c;"><span class="far fa-clock"></span> <?= $formattedDate; ?></li>
-                                                <li style="color: #01395c;"><span class="far fa-user-circle"></span> Admin</li>
-                                            </ul>
-                                        </div>
-                                        <h4><?= $b_name; ?></h4>
+                                        <h4>Website Designing In <?= $area_name; ?></h4>
                                         <div class="text" style="color: #01395c;">
-                                            <p><?= $b_description; ?></p>
+                                            <p class="text-uppercase">Website Development in Brisbane, Gold Coast & Sunshine Coast
+                                                As a leading <?= $area_name; ?> website development company, Ctrl Click builds powerful, performance-driven websites tailored for local industries across Brisbane, Gold Coast, and the Sunshine Coast. From tourism operators to service-based businesses, we create fast, mobile-responsive, and visually compelling websites that help you connect, convert, and grow.
+
+                                                Proud to be recognized as an Australia trusted website design company, we combine clean code, local SEO strategy, and seamless functionality to ensure your site delivers results — not just traffic.</p>
+                                        </div>
+                                        <h5>Why Choose Ctrl Click?</h5>
+                                        <div class="text" style="color: #01395c;">
+                                            <p class="text-uppercase">
+                                                 Australia’s Trusted Web Design Partner <br>
+                                                ⦁ Secure, Scalable & Future-Ready<br>
+                                                ⦁ Proven Results Across Industries<br>
+                                                ⦁ Experts in WordPress, Shopify, Webflow & Custom CMS<br>
+                                                ⦁ Fast, Responsive & SEO-Optimized<br>
+
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -172,55 +156,21 @@ if (isset($_GET['url'])) {
                     <!--Sidebar Side-->
                     <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
                         <aside class="sidebar blog-sidebar">
-                            
-                            <div class="sidebar-widget recent-posts">
-                                <div class="widget-inner" style="background-color: #01395c;">
-                                    <div class="sidebar-title">
-                                        <h4 style="color: white;">Recents Posts</h4>
-                                    </div>
-                                    <?php
-                                    $i = 0;
-                                    $statement = $pdo->prepare("SELECT * FROM tbl_blog WHERE status = 1 ORDER BY created_at DESC LIMIT 4");
-                                    $statement->execute();
-                                    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($result as $row) {
-                                        $i++;
-                                        $b_name = $row['b_name'];
-                                        $b_image = $row['b_image'];
-                                    ?>
-                                        <div class="post">
-                                            <a href="blog-details.php?url=<?= $b_name; ?>">
-                                                <figure class="post-thumb">
-                                                    <img src="./admin/uploads/blog/<?= $b_image; ?>" alt="<?= $b_name; ?>">
-                                                </figure>
-                                            </a>
-                                            <h5 class="text">
-                                                <a href="blog-details.php?url=<?= $row['url'] ; ?>" style="color: white !important;"><?= $b_name; ?>
-                                                    <br><span><?= $formattedDate; ?></span></a>
-                                            </h5>
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                            </div>
-
                             <div class="sidebar-widget archives">
                                 <div class="widget-inner" style="background-color: #01395c !important;">
                                     <div class="sidebar-title">
-                                        <h4 style="color: white;">Latest Blog</h4>
+                                        <h4 style="color: white;">Other's State</h4>
                                     </div>
                                     <ul>
                                         <?php
-                                        $i = 0;
-                                        $statement = $pdo->prepare("SELECT * FROM tbl_blog WHERE status = 1 ORDER BY b_id ASC LIMIT 14");
+                                        $statement = $pdo->prepare("SELECT * FROM tbl_state WHERE state_font_display = 1 ORDER BY state_name ASC");
                                         $statement->execute();
-                                        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-                                        foreach ($result as $row) {
-                                            $i++;
-                                            $b_name = $row['b_name'];
+                                        $states = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                                        foreach ($states as $state) {
                                         ?>
-                                            <li><a href="blog-details.php?url=<?= $row['url'] ; ?>" style="color: #ffffff;"><?= $b_name; ?></a></li>
+                                            <li><a href="state.php?url=<?= $state['state_cap_url']; ?>" style="color: #ffffff;"><?= $state['state_capital']; ?></a></li>
                                         <?php } ?>
-                                        <li><a href="blog.php" style="color: #ffffff;">View All </a></li>
                                     </ul>
                                 </div>
                             </div>

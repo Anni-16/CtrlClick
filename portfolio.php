@@ -1,6 +1,72 @@
 <?php
 include('./admin/inc/config.php');
 ?>
+<?php
+
+// Pagination setup
+$limit = 6;
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
+// State filter
+$state_id = isset($_GET['state_id']) && is_numeric($_GET['state_id']) ? (int) $_GET['state_id'] : null;
+
+// Count total records
+$count_query = "SELECT COUNT(*) 
+                FROM tbl_portfolio p 
+                JOIN tbl_area a ON p.area_id = a.area_id
+                JOIN tbl_city c ON a.city_id = c.city_id
+                JOIN tbl_state s ON c.state_id = s.state_id
+                WHERE p.status = 1";
+
+if ($state_id) {
+    $count_query .= " AND s.state_id = :state_id";
+    $count_stmt = $pdo->prepare($count_query);
+    $count_stmt->bindValue(':state_id', $state_id, PDO::PARAM_INT);
+} else {
+    $count_stmt = $pdo->prepare($count_query);
+}
+
+$count_stmt->execute();
+$total_records = $count_stmt->fetchColumn();
+$total_pages = ceil($total_records / $limit);
+
+// Portfolio query
+$query = "SELECT 
+            p.*, 
+            s.state_id, 
+            s.state_name, 
+            c.city_name, 
+            a.area_name, 
+            i.ind_name
+          FROM tbl_portfolio p
+          JOIN tbl_area a ON p.area_id = a.area_id
+          JOIN tbl_city c ON a.city_id = c.city_id
+          JOIN tbl_state s ON c.state_id = s.state_id
+          JOIN tbl_industry i ON p.ind_id = i.ind_id
+          WHERE p.status = 1";
+
+if ($state_id) {
+    $query .= " AND s.state_id = :state_id";
+}
+
+$query .= " ORDER BY p.p_id DESC LIMIT :limit OFFSET :offset";
+
+$stmt = $pdo->prepare($query);
+
+if ($state_id) {
+    $stmt->bindValue(':state_id', $state_id, PDO::PARAM_INT);
+}
+$stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+$stmt->execute();
+$portfolios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch all states for filters
+$state_stmt = $pdo->prepare("SELECT * FROM tbl_state ORDER BY state_id");
+$state_stmt->execute();
+$states = $state_stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -71,78 +137,138 @@ include('./admin/inc/config.php');
         </section>
         <!--End Banner Section -->
 
+        <style>
+    .filter-tabs a {
+        color: #333;
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+        transition: all 0.3s;
+    }
+
+    .filter-tabs a:hover {
+        border-bottom: 2px solid #01395c;
+    }
+
+    .filter-tabs a.active {
+        border-bottom: 2px solid #01395c; 
+        color: #01395c;
+    }
+
+    .page-link {
+        color: #01395c;
+    }
+
+    .page-item.active .page-link { 
+    background-color: #01395c;
+    border-color: #01395c;
+}
+</style>
+
+
         <!-- Gallery Section -->
         <section class="gallery-section">
             <div class="auto-container">
                 <div class="mixitup-gallery">
                     <!-- Filter -->
+
                     <!--Filter-->
                     <div class="filters centered clearfix">
-                        <ul class="filter-tabs filter-btns clearfix">
-                            <li class="active filter" data-role="button" data-filter="all">All</li>
-                            <?php
-                            // Fetch all states for filter buttons
-                            $statement = $pdo->prepare("SELECT * FROM tbl_state ORDER BY state_id");
-                            $statement->execute();
-                            $states = $statement->fetchAll(PDO::FETCH_ASSOC);
-                            foreach ($states as $state) {
-                                echo '<li class="filter" data-role="button" data-filter=".' . $state['state_id'] . '">' . $state['state_capital'] . '</li>';
-                            }
-                            ?>
+                        <ul class="filter-tabs   clearfix">
+                            <li>
+                                <a href="?" class="<?= is_null($state_id) ? 'active' : '' ?>" style="padding: 20px;">
+                                    All
+                                </a>
+                            </li>
+                            <li class="filter">
+                                <?php foreach ($states as $state): ?>
+                                <a href="?state_id=<?= $state['state_id'] ?>"
+                                    class=" <?= ($state_id == $state['state_id']) ? 'active' : '' ?>" style="padding:20px;">
+                                    <?=  ($state['state_capital']) ?>
+                                </a>
+                                <?php endforeach; ?>
+                            </li>
+
                         </ul>
                     </div>
 
-                    <div class="filter-list row">
-                        <?php
-                        // Join portfolio with area, city, state and industry
-                        $statement = $pdo->prepare("SELECT 
-                                            p.*, 
-                                            s.state_id, 
-                                            s.state_name, 
-                                            c.city_name, 
-                                            a.area_name, 
-                                            i.ind_name
-                                        FROM tbl_portfolio p
-                                        JOIN tbl_area a ON p.area_id = a.area_id
-                                        JOIN tbl_city c ON a.city_id = c.city_id
-                                        JOIN tbl_state s ON c.state_id = s.state_id
-                                        JOIN tbl_industry i ON p.ind_id = i.ind_id
-                                        WHERE p.status = 1
-                                        ORDER BY p.p_id DESC
-                                    ");
-                        $statement->execute();
-                        $portfolios = $statement->fetchAll(PDO::FETCH_ASSOC);
+                    <div class="filter-list row"> 
+                        <?php if (count($portfolios) > 0): ?>
+                        <?php foreach ($portfolios as $portfolio): ?>
 
-                        foreach ($portfolios as $portfolio) {
-                            // Use state_id as the class for filtering
-                            $state_class = $portfolio['state_id'];
-                        ?>
-                            <div class="gallery-item mix all <?= $state_class; ?> col-lg-4 col-md-6 col-sm-12">
-                                <div class="inner-box">
-                                    <figure class="image">
-                                        <img src="./admin/uploads/portfolio/<?= $portfolio['p_image']; ?>" alt="<?= $portfolio['p_name']; ?>">
-                                    </figure>
-                                    <a href="./admin/uploads/portfolio/<?= $portfolio['p_image']; ?>" class="lightbox-image overlay-box" data-fancybox="gallery"></a>
-                                    <div class="cap-box">
-                                        <div class="cap-inner">
-                                            <div>
-                                                <a href="portfolio-industry.php?id=<?= urlencode($portfolio['ind_id']); ?>" style="color: #fff; text-decoration: underline;">
-                                                    <?= $portfolio['ind_name']; ?>
-                                                </a>
-
-                                            </div>
-                                            <div class="cat">
-                                                <h5 id="yellow-color"><?= $portfolio['p_name']; ?></h5>
-                                            </div>
-                                            <div class="cat">
-                                                <a href="<?= $portfolio['p_url']; ?>" target="_blank" style="color: #fff; text-decoration: underline;">Visit Website</a>
-                                            </div>
+                        <!-- Gallery Item -->
+                        <div class="gallery-item mix all web-design col-lg-4 col-md-6 col-sm-12">
+                            <div class="inner-box">
+                                <figure class="image"><img
+                                        src="./admin/uploads/portfolio/<?=  ($portfolio['p_image']) ?>"
+                                        alt="<?=  ($portfolio['p_name']) ?>"
+                                        style="height:300px; object-fit:cover;"></figure>
+                                <a href="./admin/uploads/portfolio/<?=  ($portfolio['p_image']) ?>" class="lightbox-image overlay-box" data-fancybox="gallery"></a>
+                                <div class="cap-box">
+                                    <div class="cap-inner">
+                                        <div>
+                                            <a href="portfolio-industry.php?id=<?= $portfolio['ind_id'] ?>"
+                                                style="color: #fff; text-decoration: underline;">
+                                                <?=  ($portfolio['ind_name']) ?>
+                                            </a>
+                                        </div>
+                                        <div class="cat">
+                                            <h5 id="yellow-color"><?=  ($portfolio['p_name']) ?></h5>
+                                        </div>
+                                        <div class="cat">
+                                            <a href="<?= $portfolio['p_url'] ?>" target="_blank"
+                                                style="color: #fff; text-decoration: underline;">Visit Website</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        <?php } ?>
+                        </div>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                        <div class="col-12 text-center">
+                            <p>No portfolios found.</p>
+                        </div>
+                        <?php endif; ?>
+
                     </div>
+
+                    <!-- Pagination -->
+                        <?php if ($total_pages > 1): ?>
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                <?php if ($page > 1): ?>
+                                <!-- First page -->
+                                <li class="page-item">
+                                    <a class="page-link" href="?<?= $state_id ? "state_id=$state_id&" : "" ?>page=1">&laquo;&laquo;</a>
+                                </li>
+                                <!-- Previous page -->
+                                <li class="page-item">
+                                    <a class="page-link"
+                                    href="?<?= $state_id ? "state_id=$state_id&" : "" ?>page=<?= $page - 1 ?>">&laquo;</a>
+                                </li>
+                                <?php endif; ?>
+
+                                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                                <li class="page-item <?= ($page == $i) ? 'active' : '' ?>">
+                                    <a class="page-link"
+                                    href="?<?= $state_id ? "state_id=$state_id&" : "" ?>page=<?= $i ?>"><?= $i ?></a>
+                                </li>
+                                <?php endfor; ?>
+
+                                <?php if ($page < $total_pages): ?>
+                                <!-- Next page -->
+                                <li class="page-item">
+                                    <a class="page-link"
+                                    href="?<?= $state_id ? "state_id=$state_id&" : "" ?>page=<?= $page + 1 ?>">&raquo;</a>
+                                </li>
+                                <!-- Last page -->
+                                <li class="page-item">
+                                    <a class="page-link"
+                                    href="?<?= $state_id ? "state_id=$state_id&" : "" ?>page=<?= $total_pages ?>">&raquo;&raquo;</a>
+                                </li>
+                                <?php endif; ?>
+                            </ul>
+                        </nav>
+                        <?php endif; ?>
 
 
                 </div>
@@ -150,37 +276,35 @@ include('./admin/inc/config.php');
         </section>
         <!-- Portfolio Section End -->
 
-        <!-- Include jQuery and MixItUp (If not already included) -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/mixitup@3.3.1/dist/mixitup.min.js"></script>
+ <!-- Include jQuery and MixItUp (If not already included) -->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/mixitup@3.3.1/dist/mixitup.min.js"></script>
 
-        <script>
-            $(document).ready(function() {
-                // Initialize MixItUp
-                var mixer = mixitup('.filter-list', {
-                    selectors: {
-                        target: '.gallery-item'
-                    },
-                    load: {
-                        filter: 'all' // Default filter
-                    }
-                });
+ <script>
+     $(document).ready(function() {
+         // Initialize MixItUp
+         var mixer = mixitup('.filter-list', {
+             selectors: {
+                 target: '.gallery-item'
+             },
+             load: {
+                 filter: 'all' // Default filter
+             }
+         });
+         // Filter click event
+         $('.filter').on('click', function() {
+             var filterValue = $(this).data('filter');
+             mixer.filter(filterValue); // Apply filter based on state
+         });
+     });
+ </script>
 
-                // Filter click event
-                $('.filter').on('click', function() {
-                    var filterValue = $(this).data('filter');
-                    mixer.filter(filterValue); // Apply filter based on state
-                });
-            });
-        </script>
+ <!-- Main Footer Start -->
+ <?php include('include/footer.php'); ?>
+ <!-- Main Footer End -->
 
-
-        <!-- Main Footer Start -->
-        <?php include('include/footer.php'); ?>
-        <!-- Main Footer End -->
-
-    </div>
-    <!--End pagewrapper-->
+ </div>
+ <!--End pagewrapper-->
 
     <script src="js/jquery.js"></script>
     <script src="js/popper.min.js"></script>

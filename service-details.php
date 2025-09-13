@@ -123,7 +123,7 @@ if (isset($_GET['url'])) {
                             </div>
                             <div class="text-content">
                                 <h3><?= $services['ser_heading']; ?></h3>
-                                <p style="color: #01395c;"><?= $services['ser_description']; ?></p>
+                                <p  class="text-uppercase" style="color: #01395c;"><?= $services['ser_description']; ?></p>
                             </div>
                         </div>
                     </div>

@@ -110,7 +110,7 @@ foreach ($result as $row) {
                                     <div class="lower-box">
                                         <h4><?= $heading; ?></h4>
                                         <div class="text" style="color: #01395c;">
-                                            <p><?= $content; ?></p>
+                                            <p class="text-uppercase"><?= $content; ?></p>
                                         </div>
                                     </div>
                                 </div>
